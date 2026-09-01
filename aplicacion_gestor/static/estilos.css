@@ -1,0 +1,49 @@
+/* static/estilos.css - Versión simplificada */
+
+/* Color del navbar */
+.navbar-custom {
+    background-color: #ff9900;
+}
+
+/* Color del texto en el navbar */
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: white;
+}
+
+/* Color del texto al pasar el mouse */
+.navbar-custom .nav-link:hover {
+    color: white;
+}
+
+.footer-custom {
+    background-color: #ff9900;
+    color: white;
+}
+/* Estados de itinerarios */
+.estado-operativo {
+    background-color: #28a745 !important;  /* Verde */
+    color: white !important;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.estado-retraso {
+    background-color: #ffc107 !important;  /* Amarillo */
+    color: #000 !important;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.estado-suspendido {
+    background-color: #dc3545 !important;  /* Rojo */
+    color: white !important;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block contenido %}
+<div class="container shadow p-3">
+    <h1 class="h4">itinerario</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Origen</label>
+            <input type="text" id="origen" name="origen" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Destino</label>
+            <input type="text" id="destino" name="destino" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Duración</label>
+            <input type="text" id="duracion" name="duracion" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Hora de salida</label>
+            <input type="time" id="salida" name="salida" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Frecuencia</label>
+            <input type="text" id="frecuencia" name="frecuencia" class="form-control" required>
+        </div>
+        
+
+        <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <select id="estado" name="estado" class="form-control" required>
+                <option value="">Selecciona</option>
+                <option value="Operativo">Operativo</option>
+                <option value="Con retraso">Con retraso</option></div>
+                <option value="Suspendido">Suspendido</option></div>
+            </select>                    
+        </div>
+        
+
+        <a href="{% url 'inicio' %}" class="btn">Volver al inicio</a>
+        <button class="btn btn-primary">Crear itinerario</button>
+
+    </form>           
+    
+
+</div>
+{% endblock %}
