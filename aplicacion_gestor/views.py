@@ -108,3 +108,18 @@ def detalle(request, id):
     
     return render(request, 'detalle.html', context)
 
+def eliminar(request, id):
+    itinerarios = cargar_itinerarios()
+    itinerario_encontrado = None
+
+    for itinerario in itinerarios:
+        if itinerario['id'] == id:
+            itinerario_encontrado = itinerario
+            break
+
+    itinerarios.remove(itinerario_encontrado)
+    
+    guardar_itinerario(itinerarios)
+
+    return redirect('inicio')
+

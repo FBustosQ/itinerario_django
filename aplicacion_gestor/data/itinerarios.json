@@ -1,25 +1,5 @@
 [
     {
-        "id": 1,
-        "numero": "SI1",
-        "origen": "Santiago",
-        "destino": "Iquique",
-        "salida": "10:00",
-        "llegada": "12:00",
-        "frecuencia": 60,
-        "estado": "Operativo"
-    },
-    {
-        "id": 2,
-        "numero": "SP2",
-        "origen": "Santiago",
-        "destino": "Puerto Montt",
-        "salida": "10:00",
-        "llegada": "16:00",
-        "frecuencia": 120,
-        "estado": "Con retraso"
-    },
-    {
         "id": 3,
         "numero": "SA3",
         "origen": "Santiago",
