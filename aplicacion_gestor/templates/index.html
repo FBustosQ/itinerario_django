@@ -4,20 +4,22 @@
 
 {% block contenido %}
 
-<article class="container mt-5">
+<article class="container mt-5 mb-5">
 
     <div class="card shadow-sm">
-
         <div class="card-body">
 
-            <header class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="h4 mb-0">Itinerarios</h1>
+            <!-- Encabezado -->
+            <header class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                <h1 class="h4 mb-2 mb-sm-0">Itinerarios</h1>
+                <a href="{% url 'crear' %}" class="btn btn-info btn-sm">
+                    <i class="fas fa-plus-circle"></i> Agregar
+                </a>
             </header>
 
-            <figure class="table-responsive">
-
-                <table class="table table-bordered table-hover">
-
+            <!-- Tabla responsiva -->
+            <div class="table-responsive">
+                <table class="table table-hover tabla-itinerarios">
                     <thead class="thead-dark">
                         <tr>
                             <th>Número</th>
@@ -27,70 +29,59 @@
                             <th>Llegada</th>
                             <th>Frecuencia</th>
                             <th>Estado</th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
-
                         {% for itinerario in itinerarios %}
-
                             <tr>
-                                <td>{{ itinerario.numero }}</td>
-                                <td>{{ itinerario.origen }}</td>
-                                <td>{{ itinerario.destino }}</td>
-                                <td>{{ itinerario.salida }}</td>
-                                <td>{{ itinerario.llegada }}</td>
-                                <td>{{ itinerario.frecuencia }}</td>
-                                <td>{% with estado=itinerario.estado|lower %}
+                                <td data-label="Número">{{ itinerario.numero }}</td>
+                                <td data-label="Origen">{{ itinerario.origen }}</td>
+                                <td data-label="Destino">{{ itinerario.destino }}</td>
+                                <td data-label="Salida">{{ itinerario.salida }}</td>
+                                <td data-label="Llegada">{{ itinerario.llegada }}</td>
+                                <td data-label="Frecuencia">{{ itinerario.frecuencia }}</td>
+                                <td data-label="Estado">
+                                    {% with estado=itinerario.estado|lower %}
                                         {% if estado == 'operativo' %}
                                             <span class="estado-operativo">Operativo</span>
-                                        {% elif estado == 'con retraso' %}
+                                        {% elif estado == 'con retraso' or estado == 'retraso' %}
                                             <span class="estado-retraso">Con Retraso</span>
                                         {% elif estado == 'suspendido' %}
-                                            <span class="estado-suspendido"> Suspendido</span>
+                                            <span class="estado-suspendido">Suspendido</span>
                                         {% else %}
                                             <span class="badge badge-secondary">Sin especificar</span>
                                         {% endif %}
-                                    {% endwith %}</td>
-                                <td class="text-center">
-                                    <a
-                                        href="{% url 'detalle' itinerario.id %}"
-                                        class="btn btn-info btn-sm"
-                                    >
-                                        Ver
-                                    </a>
+                                    {% endwith %}
                                 </td>
-                                <td class="text-center">
-                                    <a
-                                        href="{% url 'eliminar' itinerario.id %}"
-                                        class="btn btn-info btn-sm"
-                                    >
-                                        Eliminar
+                                <td data-label="Acciones" class="text-center acciones">
+                                    <a href="{% url 'detalle' itinerario.id %}"
+                                       class="btn-accion btn-ver"
+                                       title="Ver detalle">
+                                        <i class="fas fa-eye"></i> Ver
+                                    </a>
+                                    <a href="{% url 'eliminar' itinerario.id %}"
+                                       class="btn-accion btn-eliminar"
+                                       title="Eliminar"
+                                       onclick="return confirm('¿Seguro que quieres eliminar este itinerario?');">
+                                        <i class="fas fa-trash"></i> Eliminar
                                     </a>
                                 </td>
                             </tr>
-
                         {% empty %}
-
                             <tr>
-                                <td colspan="8" class="text-center text-muted">
-                                    No hay itinerarios registradas.
+                                <td colspan="8" class="text-center text-muted py-4">
+                                    <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
+                                    No hay itinerarios registrados.
                                 </td>
                             </tr>
-
                         {% endfor %}
-
                     </tbody>
-
                 </table>
-
-            </figure>
+            </div>
 
         </div>
-
     </div>
 
 </article>

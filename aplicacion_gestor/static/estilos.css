@@ -1,49 +1,259 @@
-/* static/estilos.css - Versión simplificada */
+/* =========================================
+   VARIABLES
+   ========================================= */
+:root {
+    --naranja: #ff9900;
+    --naranja-oscuro: #e08800;
+    --gris-oscuro: #343a40;
+    --sombra: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
 
-/* Color del navbar */
+body {
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* =========================================
+   NAVBAR
+   ========================================= */
 .navbar-custom {
-    background-color: #ff9900;
+    background-color: var(--naranja);
+    padding: 0.7rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Color del texto en el navbar */
-.navbar-custom .navbar-brand,
-.navbar-custom .nav-link {
-    color: white;
-}
-
-/* Color del texto al pasar el mouse */
-.navbar-custom .nav-link:hover {
-    color: white;
-}
-
-.footer-custom {
-    background-color: #ff9900;
-    color: white;
-}
-/* Estados de itinerarios */
-.estado-operativo {
-    background-color: #28a745 !important;  /* Verde */
+.navbar-custom .navbar-brand {
     color: white !important;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.navbar-custom .nav-link {
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white !important;
+}
+
+/* Botón hamburguesa */
+.navbar-custom .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    color: white;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    outline: none !important;
+}
+
+.navbar-custom .navbar-toggler i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.navbar-custom .navbar-toggler:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer-custom {
+    background-color: var(--naranja);
+    color: white;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   TABLA
+   ========================================= */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.tabla-itinerarios {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.tabla-itinerarios thead th {
+    background-color: var(--gris-oscuro);
+    color: white;
+    border: none;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 12px 15px;
+}
+
+.tabla-itinerarios tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    border-top: 1px solid #eee;
+}
+
+.tabla-itinerarios tbody tr:hover {
+    background-color: #fff8ec;
+}
+
+/* =========================================
+   ESTADOS
+   ========================================= */
+.estado-operativo,
+.estado-retraso,
+.estado-suspendido {
     padding: 5px 15px;
     border-radius: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.85rem;
     display: inline-block;
+    white-space: nowrap;
+}
+
+.estado-operativo {
+    background-color: #28a745;
+    color: white;
 }
 
 .estado-retraso {
-    background-color: #ffc107 !important;  /* Amarillo */
-    color: #000 !important;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    display: inline-block;
+    background-color: #ffc107;
+    color: #000;
 }
 
 .estado-suspendido {
-    background-color: #dc3545 !important;  /* Rojo */
+    background-color: #dc3545;
+    color: white;
+}
+
+/* =========================================
+   BOTONES DE ACCIÓN
+   ========================================= */
+.acciones {
+    white-space: nowrap;
+}
+
+.btn-accion {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    border: none;
+    margin: 2px;
+}
+
+.btn-ver {
+    background-color: #17a2b8;
     color: white !important;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    display: inline-block;
+}
+
+.btn-ver:hover {
+    background-color: #138496;
+    color: white !important;
+}
+
+.btn-eliminar {
+    background-color: #dc3545;
+    color: white !important;
+}
+
+.btn-eliminar:hover {
+    background-color: #bd2130;
+    color: white !important;
+}
+
+/* =========================================
+   RESPONSIVE: MÓVIL
+   ========================================= */
+@media (max-width: 991px) {
+
+    /* Navbar: apilar enlaces en móvil */
+    .navbar-custom .navbar-collapse {
+        margin-top: 0.5rem;
+        padding: 0.5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .navbar-custom .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-custom .nav-item {
+        margin: 4px 0;
+    }
+
+    .navbar-custom .nav-link {
+        display: block;
+        padding: 0.7rem 1rem !important;
+    }
+}
+
+/* 📱 Transformar tabla en tarjetas */
+@media (max-width: 768px) {
+
+    .tabla-itinerarios thead {
+        display: none;   /* ocultamos el encabezado */
+    }
+
+    .tabla-itinerarios,
+    .tabla-itinerarios tbody,
+    .tabla-itinerarios tr,
+    .tabla-itinerarios td {
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-itinerarios tr {
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: var(--sombra);
+    }
+
+    .tabla-itinerarios td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0 !important;
+        border: none;
+        text-align: right;
+    }
+
+    .tabla-itinerarios td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--gris-oscuro);
+        text-align: left;
+        margin-right: 15px;
+    }
+
+    .tabla-itinerarios td.acciones {
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        padding-top: 12px !important;
+        border-top: 1px solid #eee;
+        margin-top: 8px;
+    }
+
+    .tabla-itinerarios td.acciones::before {
+        display: none;
+    }
+
+    .btn-accion {
+        flex: 1;
+        justify-content: center;
+        min-width: 100px;
+    }
 }

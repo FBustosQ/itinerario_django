@@ -3,119 +3,113 @@
 {% block titulo %}Detalle Itinerario #{{ itinerario.numero }}{% endblock %}
 
 {% block contenido %}
-<article class="container mt-5">
-    <div class="card shadow-sm">
-        <!-- Header con color según estado -->
-        <div class="card-header py-3 footer-custom">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Itinerario</h5>
+
+<article class="container mt-5 mb-5">
+
+    <!-- ====== CARD 1: DATOS DEL ITINERARIO ====== -->
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-header footer-custom py-3">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <h5 class="mb-2 mb-sm-0">
+                    <i class="fas fa-route"></i> Itinerario #{{ itinerario.numero }}
+                </h5>
                 <a href="{% url 'inicio' %}" class="btn btn-light btn-sm">
-                    <i class="fas fa-arrow-left mr-1"></i> Volver
+                    <i class="fas fa-arrow-left"></i> Volver
                 </a>
             </div>
         </div>
 
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-sm table-borderless">
-                        <tr>
-                            <td class="text-muted" style="width: 100px;">ID</td>
-                            <td><span class="">{{ itinerario.id }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Número</td>
-                            <td><span class="">{{ itinerario.numero }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Origen</td>
-                            <td><span class="">{{ itinerario.origen }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Destino</td>
-                            <td><span class="">{{ itinerario.destino }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Salida</td>
-                            <td><span class="">{{ itinerario.salida }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Llegada</td>
-                            <td><span class="">{{ itinerario.llegada }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Frecuencia</td>
-                            <td><span class="">{{ itinerario.frecuencia }}</span></td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">Estado</td>
-                            <td>
-                                {% with estado=itinerario.estado|lower %}
-                                    {% if estado == 'operativo' %}
-                                        <span class="badge badge-success">
-                                            <i class="fas fa-check-circle"></i> Operativo
-                                        </span>
-                                    {% elif estado == 'retraso' or estado == 'con retraso' %}
-                                        <span class="badge badge-warning">
-                                            <i class="fas fa-clock"></i> Retraso
-                                        </span>
-                                    {% elif estado == 'suspendido' %}
-                                        <span class="badge badge-danger">
-                                            <i class="fas fa-times-circle"></i> Suspendido
-                                        </span>
-                                    {% else %}
-                                        <span class="badge badge-secondary">
-                                            <i class="fas fa-question-circle"></i> Sin especificar
-                                        </span>
-                                    {% endif %}
-                                {% endwith %}
-                            </td>
-                        </tr>
+            <dl class="row mb-0">
+
+                <dt class="col-sm-3 text-muted">ID</dt>
+                <dd class="col-sm-9">{{ itinerario.id }}</dd>
+
+                <dt class="col-sm-3 text-muted">Número</dt>
+                <dd class="col-sm-9">{{ itinerario.numero }}</dd>
+
+                <dt class="col-sm-3 text-muted">Origen</dt>
+                <dd class="col-sm-9">{{ itinerario.origen }}</dd>
+
+                <dt class="col-sm-3 text-muted">Destino</dt>
+                <dd class="col-sm-9">{{ itinerario.destino }}</dd>
+
+                <dt class="col-sm-3 text-muted">Salida</dt>
+                <dd class="col-sm-9">{{ itinerario.salida }}</dd>
+
+                <dt class="col-sm-3 text-muted">Llegada</dt>
+                <dd class="col-sm-9">{{ itinerario.llegada }}</dd>
+
+                <dt class="col-sm-3 text-muted">Frecuencia</dt>
+                <dd class="col-sm-9">{{ itinerario.frecuencia }}</dd>
+
+                <dt class="col-sm-3 text-muted">Estado</dt>
+                <dd class="col-sm-9">
+                    {% with estado=itinerario.estado|lower %}
+                        {% if estado == 'operativo' %}
+                            <span class="estado-operativo">
+                                <i class="fas fa-check-circle"></i> Operativo
+                            </span>
+                        {% elif estado == 'retraso' or estado == 'con retraso' %}
+                            <span class="estado-retraso">
+                                <i class="fas fa-clock"></i> Retraso
+                            </span>
+                        {% elif estado == 'suspendido' %}
+                            <span class="estado-suspendido">
+                                <i class="fas fa-times-circle"></i> Suspendido
+                            </span>
+                        {% else %}
+                            <span class="badge badge-secondary">
+                                <i class="fas fa-question-circle"></i> Sin especificar
+                            </span>
+                        {% endif %}
+                    {% endwith %}
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+
+    <!-- ====== CARD 2: HORARIOS ====== -->
+    <div class="card shadow-sm">
+
+        <div class="card-header footer-custom py-3">
+            <h5 class="mb-0">
+                <i class="fas fa-clock"></i> Horarios
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            {% if horarios %}
+                <div class="table-responsive">
+                    <table class="table table-hover tabla-itinerarios mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Salida</th>
+                                <th>Llegada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for horario in horarios %}
+                                <tr>
+                                    <td data-label="Salida">{{ horario.salida }}</td>
+                                    <td data-label="Llegada">{{ horario.llegada }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
-            </div>
+            {% else %}
+                <p class="text-muted text-center py-4 mb-0">
+                    <i class="fas fa-inbox fa-2x mb-2 d-block"></i>
+                    No hay horarios registrados para este itinerario.
+                </p>
+            {% endif %}
+
         </div>
     </div>
-</article>
-<article class="mt-5">
-    <div class="card shadow-sm">
-        <div class="card-header py-3 footer-custom">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Detalle itinerario</h5>
-            </div>
-        </div>
-    </div>
-    <div>
-        <figure class="table-responsive">
 
-            <table class="table table-bordered table-hover">
-
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Número</th>
-                        <th>Origen</th>
-                        <th>Destino</th>
-                        <th>Salida</th>
-                        <th>Llegada</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for horario in horarios %}
-                        <tr> 
-                            <td><span>{{ itinerario.numero }}</span></td>
-                            <td><span>{{ itinerario.origen }}</span></td>
-                            <td><span>{{ itinerario.destino }}</span></td>
-                            <td><span>{{ horario.salida }}</span></td>
-                            <td><span>{{ horario.llegada }}</span></td>
-                            </td>
-                        </tr>                  
-                    {% endfor%}
-                </tbody>
-
-            </table>
-
-        </figure>
-    </div>
 </article>
 {% endblock %}
